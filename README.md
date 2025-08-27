@@ -1,10 +1,11 @@
 # orin-sage-node
-1. General
-   a.  Copy kubeconfig to your home directory
+**General things to be done**      
+   - Copy kubeconfig to your home directory
+   - 
 
-**Issue 1: WES tools were not being downloaded
-**   Cause: get_core_device() function in scrape-system-metrics.py (waggle-edge-stack/kubernetes/debug) is hardcoded to look for a device with IP address 10.31.81.1 
-   What I did: 
+**Issue 1: WES tools were not being downloaded**   
+- Cause: get_core_device() function in scrape-system-metrics.py (waggle-edge-stack/kubernetes/debug) is hardcoded to look for a device with IP address 10.31.81.1 
+- Fix: 
   ```
   def get_core_device(devices: List[Device]) -> Device:
       for device in devices:
@@ -15,25 +16,20 @@
           return devices[0]
       raise KeyError("could not find core device")
   ```
-**Issue 2: Faced some issues with temp file ownership
-**
-Fix: 
+**Issue 2: Faced some issues with temp file ownership**
+- Fix: 
   sudo rm -f /tmp/terminating-pods-*
   sudo chmod 755 /tmp
 
 
-**Issue 3: wes-device-labeler-* service failing
-**
-Cause: 
+**Issue 3: wes-device-labeler-* service failing**
+- Cause: 
 
 
 
-**Issue 4: wes-update-waggle-ssh-keys service failing
-**
-Cause: /home/waggle/.ssh doesn't exist
-
-Fix:
-
+**Issue 4: wes-update-waggle-ssh-keys service failing**
+- Cause: /home/waggle/.ssh doesn't exist
+- Fix:
   Create Waggle user first if it doesn't exist (sudo useradd -m -s /bin/bash waggle), and then
   ```
   sudo mkdir -p /home/waggle/.ssh
