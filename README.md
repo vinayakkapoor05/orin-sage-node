@@ -25,7 +25,20 @@
    ```
 
 **Issue 3: wes-device-labeler-x service failing**
-- Cause: 
+- Cause: Incorrect Kubernetes node name - needs to match the MAC address format expected by the device labeler
+- Fix:
+  ```
+  sudo systemctl stop k3s
+   sudo nano /etc/rancher/k3s/config.yaml
+   # Add: node-name: <MAC_ADDR>
+   sudo systemctl start k3s
+  ```
+   Delete the old node and clean up associated pv
+  ```
+   sudo kubectl delete node <old_node_name>
+   sudo kubectl delete pvc --all  # if vol have wrong node affinity (this happened for me)
+  ```
+  
 
 
 
