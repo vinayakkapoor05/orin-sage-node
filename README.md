@@ -17,12 +17,14 @@
       raise KeyError("could not find core device")
   ```
 **Issue 2: Faced some issues with temp file ownership**
-- Fix: 
-  sudo rm -f /tmp/terminating-pods-*
+
+- Fix:
+  ```
+  sudo rm -f /tmp/terminating-pods-* 
   sudo chmod 755 /tmp
+   ```
 
-
-**Issue 3: wes-device-labeler-* service failing**
+**Issue 3: wes-device-labeler-x service failing**
 - Cause: 
 
 
